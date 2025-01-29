@@ -1,11 +1,12 @@
 import json
+import os
 import datetime
 import requests
 import pandas as pd
 import streamlit as st
 
-BIN_ID = "679a08ede41b4d34e4809a03"
-SECRET_KEY = "$2a$10$iuRQgy4DIiFpnA2/E3zMwu9MHnO9XkdciauoYGg3oKs03cd1dxuHa"
+BIN_ID = st.secrets["JSON_BIN_ID"]
+SECRET_KEY = st.secrets["JSON_BIN_SECRET"]
 BASE_URL = "https://api.jsonbin.io/v3/b"
 HEADERS = {
     "Content-Type": "application/json",
