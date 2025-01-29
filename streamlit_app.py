@@ -54,12 +54,11 @@ columns_dict = last_item.get("columns", {})
 
 st.title("Melta Editor")
 
+st.subheader(f"Table: {selected_table_name}")
+
 df = pd.DataFrame([columns_dict])
 df_long = df.melt(ignore_index=True, var_name="Field", value_name="Description")
 edited_df = st.data_editor(df_long, num_rows="dynamic", use_container_width=True)
-
-st.write("## Edited Data")
-st.dataframe(edited_df, use_container_width=True)
 
 if st.button("Submit"):
     updated_values = dict(zip(edited_df["Field"], edited_df["Description"]))
