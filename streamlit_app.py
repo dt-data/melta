@@ -4,7 +4,7 @@ import requests
 import pandas as pd
 import streamlit as st
 
-BIN_ID = "679a0497e41b4d34e480976b"
+BIN_ID = "679a08ede41b4d34e4809a03"
 SECRET_KEY = "$2a$10$iuRQgy4DIiFpnA2/E3zMwu9MHnO9XkdciauoYGg3oKs03cd1dxuHa"
 BASE_URL = "https://api.jsonbin.io/v3/b"
 HEADERS = {
@@ -53,8 +53,11 @@ last_item = rows[-1]
 columns_dict = last_item.get("columns", {})
 
 st.title("Melta Editor")
-
 st.subheader(f"Table: {selected_table_name}")
+
+table_description = last_item.get("table_description", "")
+
+desc_input = st.text_input("Table Description", value=table_description)
 
 df = pd.DataFrame([columns_dict])
 df_long = df.melt(ignore_index=True, var_name="Field", value_name="Description")
@@ -64,6 +67,7 @@ if st.button("Submit"):
     updated_values = dict(zip(edited_df["Field"], edited_df["Description"]))
     new_item = {
         "melta_datetime": datetime.datetime.now().isoformat(),
+        "table_description": desc_input,
         "columns": updated_values
     }
     rows.append(new_item)

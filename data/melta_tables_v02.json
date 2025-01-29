@@ -1,0 +1,52 @@
+[
+    {
+      "table_name": "product",
+      "data": [
+        {
+          "melta_datetime": null,
+          "table_description": null,
+          "columns": {
+            "id": null,
+            "name": null,
+            "description": null,
+            "created_at": null
+          }
+        },
+        {
+          "melta_datetime": "2025-01-29T10:37:30.800877",
+          "table_description": null,
+          "columns": {
+            "id": "identifier of the product",
+            "name": "name of the product",
+            "description": "description of the product",
+            "created_at": "time the product was added"
+          }
+        }
+      ]
+    },
+    {
+      "table_name": "store",
+      "data": [
+        {
+          "melta_datetime": null,
+          "table_description": null,
+          "columns": {
+            "id": null,
+            "name": null,
+            "suburb": null,
+            "city": null
+          }
+        },
+        {
+          "melta_datetime": "2025-01-29T10:41:35.114453",
+          "table_description": null,
+          "columns": {
+            "id": "identifier of the store",
+            "name": "name of the store",
+            "suburb": "suburb the store is located in",
+            "city": "city the store is located in"
+          }
+        }
+      ]
+    }
+  ]
