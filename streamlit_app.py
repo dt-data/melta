@@ -4,13 +4,15 @@ import requests
 import pandas as pd
 import streamlit as st
 
-BIN_ID = "6799ff90e41b4d34e4809426"
+BIN_ID = "679a0497e41b4d34e480976b"
 SECRET_KEY = "$2a$10$iuRQgy4DIiFpnA2/E3zMwu9MHnO9XkdciauoYGg3oKs03cd1dxuHa"
 BASE_URL = "https://api.jsonbin.io/v3/b"
 HEADERS = {
     "Content-Type": "application/json",
     "X-Master-Key": SECRET_KEY
 }
+
+st.set_page_config(layout="wide")
 
 def fetch_data():
     url = f"{BASE_URL}/{BIN_ID}/latest"
@@ -32,34 +34,38 @@ def update_data(new_data):
 
 data = fetch_data()
 
-if len(data) == 0:
-    data = [
-        {
-            "datetime": None,
-            "values": {
-                "id": None,
-                "name": None,
-                "description": None,
-                "created_at": None
-            }
-        }
-    ]
+table_names = [item["table_name"] for item in data]
+selected_table_name = st.sidebar.selectbox("Select a Table", table_names)
 
-last_item = data[-1]
-values_dict = last_item.get("values", {})
+table_data = next((t for t in data if t["table_name"] == selected_table_name), None)
 
-df = pd.DataFrame([values_dict])
-df_long = df.melt(ignore_index=True, var_name="Field", value_name="Description")
+if not table_data:
+    st.error("No table found.")
+    st.stop()
+
+rows = table_data.get("data", [])
+
+if len(rows) == 0:
+    st.warning("No rows for this table.")
+    st.stop()
+
+last_item = rows[-1]
+columns_dict = last_item.get("columns", {})
 
 st.title("Melta Editor")
 
+df = pd.DataFrame([columns_dict])
+df_long = df.melt(ignore_index=True, var_name="Field", value_name="Description")
 edited_df = st.data_editor(df_long, num_rows="dynamic", use_container_width=True)
+
+st.write("## Edited Data")
+st.dataframe(edited_df, use_container_width=True)
 
 if st.button("Submit"):
     updated_values = dict(zip(edited_df["Field"], edited_df["Description"]))
     new_item = {
         "melta_datetime": datetime.datetime.now().isoformat(),
-        "values": updated_values
+        "columns": updated_values
     }
-    data.append(new_item)
+    rows.append(new_item)
     update_data(data)

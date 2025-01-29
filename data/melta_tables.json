@@ -1,0 +1,30 @@
+[
+    {
+        "table_name": "product",
+        "data": [
+            {
+                "melta_datetime": null,
+                "columns": {
+                    "id": null,
+                    "name": null,
+                    "description": null,
+                    "created_at": null
+                }
+            }
+        ]
+    },
+    {
+        "table_name": "store",
+        "data": [
+            {
+                "melta_datetime": null,
+                "columns": {
+                    "id": null,
+                    "name": null,
+                    "suburb": null,
+                    "city": null
+                }
+            }
+        ]
+    }    
+]
