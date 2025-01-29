@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 
 BIN_ID = "6799ff90e41b4d34e4809426"
-SECRET_KEY = "$2a$10$SQgyOb5fT/7eNJDfHeGvkuDOqn4j.l41IYD6rvVngsOkvdj24mm1e"
+SECRET_KEY = "$2a$10$iuRQgy4DIiFpnA2/E3zMwu9MHnO9XkdciauoYGg3oKs03cd1dxuHa"
 BASE_URL = "https://api.jsonbin.io/v3/b"
 HEADERS = {
     "Content-Type": "application/json",
