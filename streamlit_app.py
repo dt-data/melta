@@ -9,7 +9,7 @@ st.write(
 
 
 url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSKhCMTNxdjJiRx19g1p4TCyGEirJcgdJ_YKkNYl5U_DuCNtyIRYiidIeaHOux5ekZbOvRblqpiXVic/pub?gid=0&single=true&output=csv'
-df = pd.read_csv(url)
+df = pd.read_csv(url, dtype=str)
 
 # The data_editor allows editing rows and columns in real time
 edited_df = st.data_editor(df, num_rows="dynamic")
