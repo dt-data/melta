@@ -9,7 +9,7 @@ df = pd.json_normalize(data)
 df = df.astype(str)
 
 st.title("Local JSON Data in Streamlit")
-df_long = df.melt(ignore_index=False, var_name='Field', value_name='Description')
+df_long = df.melt(ignore_index=True, var_name='Field', value_name='Description')
 
 st.subheader("Editable Data Editor")
 edited_df = st.data_editor(df_long, num_rows="dynamic")
