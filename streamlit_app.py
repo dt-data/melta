@@ -53,13 +53,7 @@ df_long = df.melt(ignore_index=True, var_name="Field", value_name="Description")
 
 st.title("Melta Editor")
 
-edited_df = st.data_editor(df_long, num_rows="dynamic")
-
-st.write("""
-## Edited Data
-Here is the result of your edits:
-""")
-st.dataframe(edited_df)
+edited_df = st.data_editor(df_long, num_rows="dynamic", use_container_width=True)
 
 if st.button("Submit"):
     updated_values = dict(zip(edited_df["Field"], edited_df["Description"]))
